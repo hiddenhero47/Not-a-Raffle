@@ -14,12 +14,10 @@ import {
 } from 'redux-persist';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
-import counterReducer from '../features/counter/counterSlice';
 import themes from './slice/app-theme';
 
 // Combine all reducers
 const appReducer = combineReducers({
-	counter: counterReducer,
 	themes,
 });
 

@@ -1,58 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from 'react-query';
+// import './index.css';
+import IndexLayout from './layout/index-layout/index';
+import AppToast from './layout/toast';
+import Home from './pages/home';
+import AboutUs from './pages/about-us';
+
+const queryClient = new QueryClient();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+	return (
+		<QueryClientProvider client={queryClient}>
+			<Router>
+				<div className="containerBody">
+					<Routes>
+						<Route element={<IndexLayout />}>
+							<Route path="/" element={<Home />} />
+							<Route path="/about-us" element={<AboutUs />} />
+						</Route>
+						{/* <Route path="*" element={<NotFound />} /> */}
+					</Routes>
+				</div>
+			</Router>
+			<AppToast />
+		</QueryClientProvider>
+	);
 }
 
 export default App;
