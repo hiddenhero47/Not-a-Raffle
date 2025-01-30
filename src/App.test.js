@@ -13,3 +13,4 @@ test('renders learn react link', () => {
 
   expect(getByText(/learn/i)).toBeInTheDocument();
 });
+// https://www.geeksforgeeks.org/how-to-test-react-components-using-jest/
