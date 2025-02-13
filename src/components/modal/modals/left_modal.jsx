@@ -1,74 +1,69 @@
-/* eslint-disable react/prop-types */
 import React, {
 	useState,
 	useRef,
 	useImperativeHandle,
 	forwardRef,
 } from 'react';
-// import PropTypes from 'prop-types';
-import { ModalLeftWrapper } from '../index_modal.style';
-import { useElementDimensions } from '../../../utilities/dimensions';
+
+import { LeftDialog, LeftSell } from '../index_modal.style';
 
 function ModalLeft(
 	{ children, onClose, onOpen, width, animation, maxWidth },
 	ref
 ) {
 	const [isOpen, setIsOpen] = useState(false);
-	const useGetSize = useElementDimensions;
 	const modalRef = useRef(null);
+	const ModelSellRef = useRef(null);
 
-	useImperativeHandle(
-		ref,
-		() => {
-			return {
-				open() {
-					openModal();
-				},
-				close() {
-					closeModal();
-				},
-			};
-		},
-		[]
-	);
+	useImperativeHandle(ref, () => {
+		return {
+			open() {
+				openModal();
+			},
+			close() {
+				closeModal();
+			},
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	function closeModal() {
 		onClose();
 		setIsOpen(false);
-		(() => {
-			modalRef.current.close();
-		})();
 	}
 
 	function openModal() {
 		onOpen();
 		setIsOpen(true);
-		(() => {
-			modalRef.current.showModal();
-		})();
 	}
 
 	function handelClose(event) {
-		if (event && !event.target.contains(modalRef.current)) {
+		if (event && !event.target.contains(ModelSellRef.current)) {
 			return;
 		}
 		closeModal();
 	}
 
 	return (
-		<ModalLeftWrapper
+		<LeftDialog
 			open={isOpen}
-			onClose={closeModal}
 			onClick={handelClose}
 			ref={modalRef}
-			$isOpen={isOpen}
-			width={width}
-			$maxWidth={maxWidth}
-			$animation={animation}
-			$sizeX={useGetSize(modalRef).width}
+			onClose={closeModal}
 		>
-			{children}
-		</ModalLeftWrapper>
+			<LeftSell
+			    className='intro-x'
+				open={isOpen}
+				onClose={closeModal}
+				ref={ModelSellRef}
+				$isOpen={isOpen}
+				width={width}
+				$maxWidth={maxWidth}
+				$animation={animation}
+			>
+				{children}
+			</LeftSell>
+		</LeftDialog>
 	);
 }
 

@@ -6,65 +6,59 @@ import React, {
 	forwardRef,
 } from 'react';
 // import PropTypes from 'prop-types';
-import { ModalBottomWrapper } from '../index_modal.style';
-import { useElementDimensions } from '../../../utilities/dimensions';
+import { BottomDialog, BottomSell } from '../index_modal.style';
 
 function ModalBottom({ children, onClose, onOpen, height, animation }, ref) {
 	const [isOpen, setIsOpen] = useState(false);
-	const useGetSize = useElementDimensions;
 	const modalRef = useRef(null);
+	const ModelSellRef = useRef(null);
 
-	useImperativeHandle(
-		ref,
-		() => {
-			return {
-				open() {
-					openModal();
-				},
-				close() {
-					closeModal();
-				},
-			};
-		},
-		[]
-	);
+	useImperativeHandle(ref, () => {
+		return {
+			open() {
+				openModal();
+			},
+			close() {
+				closeModal();
+			},
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	function closeModal() {
 		onClose();
 		setIsOpen(false);
-		(() => {
-			modalRef.current.close();
-		})();
 	}
 
 	function openModal() {
 		onOpen();
 		setIsOpen(true);
-		(() => {
-			modalRef.current.showModal();
-		})();
 	}
 
 	function handelClose(event) {
-		if (event && !event.target.contains(modalRef.current)) {
+		if (event && !event.target.contains(ModelSellRef.current)) {
 			return;
 		}
 		closeModal();
 	}
 
 	return (
-		<ModalBottomWrapper
+		<BottomDialog
 			open={isOpen}
-			onClose={closeModal}
 			onClick={handelClose}
 			ref={modalRef}
-			$isOpen={isOpen}
-			height={height}
-			$animation={animation}
-			$sizeY={useGetSize(modalRef).height}
+			onClose={closeModal}
 		>
-			{children}
-		</ModalBottomWrapper>
+			<BottomSell
+				open={isOpen}
+				ref={ModelSellRef}
+				$isOpen={isOpen}
+				height={height}
+				$animation={animation}
+			>
+				{children}
+			</BottomSell>
+		</BottomDialog>
 	);
 }
 

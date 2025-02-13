@@ -1,12 +1,11 @@
-/* eslint-disable react/prop-types */
 import React, {
 	useState,
 	useRef,
 	useImperativeHandle,
 	forwardRef,
 } from 'react';
-// import PropTypes from 'prop-types';
-import { ModalCenterDialog, ModalContent } from '../index_modal.style';
+
+import { CenterDialog, CenterShell } from '../index_modal.style';
 
 function ModalCenter(
 	{
@@ -23,7 +22,7 @@ function ModalCenter(
 ) {
 	const [isOpen, setIsOpen] = useState(false);
 	const modalRef = useRef(null);
-	const ModalContentRef = useRef(null);
+	const ModelSellRef = useRef(null);
 
 	useImperativeHandle(ref, () => {
 		return {
@@ -34,7 +33,7 @@ function ModalCenter(
 				closeModal();
 			},
 		};
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	function closeModal() {
@@ -54,18 +53,22 @@ function ModalCenter(
 	}
 
 	function handelClose(event) {
-		if (event && !event.target.contains(ModalContentRef.current)) {
+		if (event && !event.target.contains(ModelSellRef.current)) {
 			return;
 		}
 		closeModal();
 	}
 
 	return (
-		<ModalCenterDialog open={isOpen} onClick={handelClose} ref={modalRef}>
-			<ModalContent
+		<CenterDialog
+			open={isOpen}
+			onClick={handelClose}
+			ref={modalRef}
+			onClose={closeModal}
+		>
+			<CenterShell
 				open={isOpen}
-				onClose={closeModal}
-				ref={ModalContentRef}
+				ref={ModelSellRef}
 				$isOpen={isOpen}
 				width={width}
 				$maxWidth={maxWidth}
@@ -74,8 +77,8 @@ function ModalCenter(
 				$borderPaddingY={borderPaddingY}
 			>
 				{children}
-			</ModalContent>
-		</ModalCenterDialog>
+			</CenterShell>
+		</CenterDialog>
 	);
 }
 
