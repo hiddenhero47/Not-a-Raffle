@@ -11,9 +11,22 @@ import {
 	PageCard,
 	SideMenuWrapper,
 } from './index.style';
+import Sidebar from '../sidebars/sidebar';
 
 function IndexLayout() {
 	const { theme } = useSelector((state) => state.themes);
+
+	(() => {
+		const bodyElement = document.querySelector('body');
+		const htmlElement = document.querySelector('html');
+
+		if (bodyElement) {
+			bodyElement.classList.add('bg-dashboardBg');
+		}
+		if (htmlElement) {
+			htmlElement.classList.add(theme === 'dark' ? 'nightMode' : 'dayMode');
+		}
+	})();
 
 	const active = true;
 	return (
@@ -23,10 +36,14 @@ function IndexLayout() {
 			<ScrollToTop />
 			<LayoutWrapper>
 				<LayoutContainer>
-					<SidebarWrapper></SidebarWrapper>
+					<SidebarWrapper>
+						<Sidebar />
+					</SidebarWrapper>
+
 					<PageCard>
 						<Outlet />
 					</PageCard>
+
 					<SideMenuWrapper $isActive={Boolean(active)}></SideMenuWrapper>
 				</LayoutContainer>
 			</LayoutWrapper>

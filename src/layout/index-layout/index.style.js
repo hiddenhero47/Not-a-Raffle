@@ -103,7 +103,7 @@ export const SidebarWrapper = styled.div`
 	min-width: 72px;
 	max-width: 75px;
 	border-radius: 20px 0px 0px 20px;
-	background-color: ${({ theme }) => theme.mainBody?.sidebarBg};
+	background-color: ${({ theme }) => theme.sidebar?.background};
 
 	@media (max-width: 635px) {
 		width: 0px;
@@ -143,7 +143,7 @@ export const SideMenuWrapper = styled.div`
 	max-width: ${(props) => (props.$isActive ? '240px' : 'unset')};
 	display: ${(props) => (props.$isActive ? 'flex' : 'none')};
 	border-radius: 0px 20px 20px 0px;
-	background-color: ${({ theme }) => theme.mainBody?.sideMenu};
+	background-color: ${({ theme }) => theme.sideMenu?.background};
 
 	@media (max-width: 1150px) {
 		width: 0px;
