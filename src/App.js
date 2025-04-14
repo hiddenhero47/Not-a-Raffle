@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { WagmiProvider } from 'wagmi';
-import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import '@rainbow-me/rainbowkit/styles.css';
-import wagmiConfig, { chains } from './features/web3-services/connector-config';
+// import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+// import '@rainbow-me/rainbowkit/styles.css';
+import wagmiConfig from './features/web3-services/connector-config';
 // import './index.css';
 import IndexLayout from './layout/index-layout/index';
 import AppToast from './layout/toast';
@@ -19,7 +19,7 @@ function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<WagmiProvider config={wagmiConfig}>
-				<RainbowKitProvider chains={chains}>
+				{/* <RainbowKitProvider chains={chains}> */}
 					<Router>
 						<div className="containerBody">
 							<Routes>
@@ -33,7 +33,7 @@ function App() {
 						</div>
 					</Router>
 					<AppToast />
-				</RainbowKitProvider>
+				{/* </RainbowKitProvider> */}
 			</WagmiProvider>
 		</QueryClientProvider>
 	);

@@ -2,7 +2,7 @@ import { configureChains, createConfig } from 'wagmi';
 import { mainnet, polygon, arbitrum, sepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-import { getDefaultWallets } from '@rainbow-me/rainbowkit';
+// import { getDefaultWallets } from '@rainbow-me/rainbowkit';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
@@ -37,15 +37,15 @@ export const injectedConnector = new InjectedConnector({
 	},
 });
 
-const { connectors } = getDefaultWallets({
-	appName: 'Not A Raffle',
-	projectId: 'a05f89c1a1925d672b4462bb4091c2ff', // Go to cloud.walletconnect.com to get one
-	chains,
-});
+// const { connectors } = getDefaultWallets({
+// 	appName: 'Not A Raffle',
+// 	projectId: 'a05f89c1a1925d672b4462bb4091c2ff', // Go to cloud.walletconnect.com to get one
+// 	chains,
+// });
 
 const wagmiConfig = createConfig({
 	autoConnect: true,
-	connectors,
+	connectors: [injectedConnector],
 	publicClient,
 });
 
