@@ -12,6 +12,7 @@ import {
 	SideMenuWrapper,
 } from './index.style';
 import Sidebar from '../sidebars/sidebar';
+import EthereumListeners from '../../features/web3-services/web3-ethereum-listeners';
 
 function IndexLayout() {
 	const { theme } = useSelector((state) => state.themes);
@@ -34,6 +35,7 @@ function IndexLayout() {
 			theme={theme === 'light' ? colors?.dayMode : colors?.nightMode}
 		>
 			<ScrollToTop />
+			<EthereumListeners />
 			<LayoutWrapper>
 				<LayoutContainer>
 					<SidebarWrapper>
