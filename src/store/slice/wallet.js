@@ -25,7 +25,7 @@ const initialState = {
 	address: null,
 	chainId: null,
 	walletData: null, // address, provider, signer
-	menuIsActive: false,
+	menuIsActive: true,
 	pending: false,
 	isConnected: false,
 	connectionError: false,
