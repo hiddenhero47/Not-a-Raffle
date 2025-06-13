@@ -5,12 +5,18 @@ import {
 	updateAccount,
 	updateChain,
 	reconnectWallet,
+	refresh,
 } from '../../store/slice/wallet';
 
 const EthereumListeners = () => {
 	const dispatch = useDispatch();
 	const { isConnected, walletType } = useSelector((state) => state.wallet);
 	const triedReconnect = useRef(false);
+
+	const data = useSelector((state) => state.wallet);
+
+	console.log(data);
+	
 
 	useEffect(() => {
 		if (
@@ -21,6 +27,7 @@ const EthereumListeners = () => {
 		) {
 			dispatch(reconnectWallet());
 		}
+		dispatch(refresh());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // import { ethers } from 'ethers';
+import { BrowserProvider } from 'ethers';
 import EthereumProvider from '@walletconnect/ethereum-provider';
 import { initWcProviderEvents } from '../../features/web3-services/web3-utilities';
 
-const ethers = require("ethers")
+// const {ethers} = require("ethers")
 
 const chains = [1, 137, 56]; // Add more supported chains if needed
 
@@ -44,8 +45,8 @@ export const connectWalletGlobal = createAsyncThunk(
 			await wcProvider.connect();
 			initWcProviderEvents(wcProvider, thunkAPI.dispatch);
 
-			const provider = new ethers.providers.Web3Provider(wcProvider);
-			const signer = provider.getSigner();
+			const provider = new BrowserProvider(wcProvider);
+			const signer = await provider.getSigner();
 			const address = await signer.getAddress();
 			const network = await provider.getNetwork();
 
@@ -78,8 +79,8 @@ export const reconnectWallet = createAsyncThunk(
 			) {
 				initWcProviderEvents(wcProvider, thunkAPI.dispatch);
 
-				const provider = new ethers.providers.Web3Provider(wcProvider);
-				const signer = provider.getSigner();
+				const provider = new BrowserProvider(wcProvider);
+				const signer = await provider.getSigner();
 				const address = await signer.getAddress();
 				const network = await provider.getNetwork();
 				return {
@@ -106,8 +107,8 @@ export const connectWallet = createAsyncThunk(
 
 			await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const signer = provider.getSigner();
+			const provider = new BrowserProvider(window.ethereum);
+			const signer = await provider.getSigner();
 			const address = await signer.getAddress();
 			const network = await provider.getNetwork();
 
@@ -175,6 +176,11 @@ const walletSlice = createSlice({
 				state.walletData.chainId = action.payload;
 			}
 			state.chainId = action.payload;
+		},
+		refresh: (state) => {
+			state.pending = false;
+			state.connectionError = false;
+			state.message = "";
 		},
 	},
 	extraReducers: (builder) => {
@@ -255,6 +261,6 @@ const walletSlice = createSlice({
 	},
 });
 
-export const { resetWalletState, activateMenu, updateAccount, updateChain } =
+export const { resetWalletState, activateMenu, updateAccount, updateChain, refresh } =
 	walletSlice.actions;
 export default walletSlice.reducer;

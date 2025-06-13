@@ -7,6 +7,7 @@ export const WalletMenuWrapper = styled.div`
 	overflow-y: auto;
 	position: relative;
     border-radius: inherit;
+	font-family: Outfit;
 
 	#WalletLoader {
 		position: absolute;
@@ -16,6 +17,8 @@ export const WalletMenuWrapper = styled.div`
         background-color: rgb(34, 37, 42, 0.4);
         border-radius: inherit;
 		z-index: 30;
+		top: 0;
+		left: 0;
 
         .loader_box {
             margin: auto;
