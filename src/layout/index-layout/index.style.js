@@ -112,20 +112,20 @@ export const SidebarWrapper = styled.div`
 	}
 `;
 
-export const PageCard = styled.div`
+export const PageFrame = styled.div`
 	flex-grow: 1;
 	flex-basis: 0;
 	min-width: 500px;
 	height: 100%;
 	border-radius: 20px;
-	background-color: ${({ theme }) => theme.mainBody?.cardBg};
+	background-color: ${({ theme }) => theme.mainBody?.frameBg};
 	border-width: 0px 2px 2px 0px;
 	border-style: solid;
-	border-color: ${({ theme }) => theme.mainBody?.cardBorder};
+	border-color: ${({ theme }) => theme.mainBody?.frameBorder};
 	background-image: linear-gradient(
 		195deg,
-		${({ theme }) => theme.mainBody?.cardLight} 0%,
-		${({ theme }) => theme.mainBody?.cardDark} 90%
+		${({ theme }) => theme.mainBody?.frameLight} 0%,
+		${({ theme }) => theme.mainBody?.frameDark} 90%
 	);
 
 	@media (max-width: 635px) {

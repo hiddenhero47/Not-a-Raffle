@@ -8,7 +8,7 @@ import {
 	LayoutWrapper,
 	LayoutContainer,
 	SidebarWrapper,
-	PageCard,
+	PageFrame,
 	SideMenuWrapper,
 } from './index.style';
 import Sidebar from '../sidebars/sidebar';
@@ -79,9 +79,9 @@ function IndexLayout() {
 						<Sidebar />
 					</SidebarWrapper>
 
-					<PageCard>
+					<PageFrame>
 						<Outlet />
-					</PageCard>
+					</PageFrame>
 
 					<SideMenuWrapper $isActive={Boolean(walletMenuActive)}>
 						<WalletMenu closeModal={closeModal} />
