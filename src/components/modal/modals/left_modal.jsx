@@ -5,7 +5,7 @@ import React, {
 	forwardRef,
 } from 'react';
 
-import { LeftDialog, LeftSell } from '../index_modal.style';
+import { LeftDialog, LeftShell } from '../index_modal.style';
 
 function ModalLeft(
 	{ children, onClose, onOpen, width, animation, maxWidth },
@@ -51,7 +51,7 @@ function ModalLeft(
 			ref={modalRef}
 			onClose={closeModal}
 		>
-			<LeftSell
+			<LeftShell
 			    className='intro-x'
 				open={isOpen}
 				onClose={closeModal}
@@ -62,7 +62,7 @@ function ModalLeft(
 				$animation={animation}
 			>
 				{children}
-			</LeftSell>
+			</LeftShell>
 		</LeftDialog>
 	);
 }

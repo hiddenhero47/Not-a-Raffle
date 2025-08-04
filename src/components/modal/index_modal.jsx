@@ -39,11 +39,12 @@ Modal.Left.propTypes = {
 	children: PropTypes.node,
 };
 
-Modal.Bottom = ({ refName, onClose, onOpen, height, animation, children }) => (
+Modal.Bottom = ({ refName, onClose, onOpen, width, height, animation, children }) => (
 	<ModalBottom
 		ref={refName}
 		onClose={onClose}
 		onOpen={onOpen}
+		width={width}
 		height={height}
 		animation={animation}
 	>
@@ -58,6 +59,7 @@ Modal.Bottom.propTypes = {
 	onClose: PropTypes.func,
 	onOpen: PropTypes.func,
 	height: PropTypes.string,
+	width: PropTypes.string,
 	animation: PropTypes.bool,
 	children: PropTypes.node,
 };

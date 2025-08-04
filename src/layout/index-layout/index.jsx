@@ -10,17 +10,24 @@ import {
 	SidebarWrapper,
 	PageFrame,
 	SideMenuWrapper,
+	NavBar,
+	MenuButton,
+	GlassMenuWrapper,
 } from './index.style';
 import Sidebar from '../sidebars/sidebar';
 import EthereumListeners from '../../features/web3-services/web3-ethereum-listeners';
 import Modal from '../../components/modal/index_modal';
 import { activateMenu } from '../../store/slice/wallet';
 import WalletMenu from '../side-menu/side-menu';
+import { TbGridDots } from 'react-icons/tb';
+import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 
 function IndexLayout() {
 	const dispatch = useDispatch();
 	const { theme } = useSelector((state) => state.themes);
 	const { menuIsActive } = useSelector((state) => state.wallet);
+
+	const isMobile = () => window.matchMedia('(max-width: 1150px)').matches;
 
 	(() => {
 		const bodyElement = document.querySelector('body');
@@ -34,8 +41,22 @@ function IndexLayout() {
 		}
 	})();
 
-	const modalRef = useRef(null);
+	const MenuRef = useRef(null);
+	// Open the modal
+	const openSidebar = () => {
+		if (MenuRef.current) {
+			MenuRef.current.open();
+		}
+	};
 
+	// Close the modal
+	const closeSidebar = () => {
+		if (MenuRef.current) {
+			MenuRef.current.close();
+		}
+	};
+
+	const modalRef = useRef(null);
 	// Open the modal
 	const openModal = () => {
 		if (modalRef.current) {
@@ -51,21 +72,20 @@ function IndexLayout() {
 	};
 
 	const walletMenuActive = useMemo(() => {
-		const isMobile = window.matchMedia('(max-width: 500px)').matches;
-
-		if (isMobile && menuIsActive) {
+		if (isMobile() && menuIsActive) {
 			openModal();
 			return false;
 		}
 
-		if (!isMobile && menuIsActive) {
+		if (!isMobile() && menuIsActive) {
 			return true;
 		}
 
 		return false;
 	}, [menuIsActive]);
 
-	console.log(walletMenuActive, menuIsActive);
+	const walletMenuSwitch = () =>
+		isMobile() ? openModal() : dispatch(activateMenu(!menuIsActive));
 
 	return (
 		<ThemeProvider
@@ -75,29 +95,59 @@ function IndexLayout() {
 			<EthereumListeners />
 			<LayoutWrapper>
 				<LayoutContainer>
-					<SidebarWrapper>
+					<SidebarWrapper
+						className="intro-x"
+						onAnimationStart={closeSidebar}
+						style={{ transitionBehavior: 'allow-discrete' }}
+					>
 						<Sidebar />
 					</SidebarWrapper>
 
 					<PageFrame>
+						<NavBar>
+							<div className="basis-0 flex-grow min-w-0"></div>
+							<button onClick={walletMenuSwitch}>
+								<HiOutlineMenuAlt3 />
+							</button>
+						</NavBar>
+
 						<Outlet />
+
+						<MenuButton onClick={openSidebar}>
+							<TbGridDots />
+						</MenuButton>
 					</PageFrame>
 
-					<SideMenuWrapper $isActive={Boolean(walletMenuActive)}>
+					<SideMenuWrapper
+						className="-intro-x"
+						$isActive={Boolean(walletMenuActive)}
+						style={{ transitionBehavior: 'allow-discrete' }}
+						onAnimationStart={closeModal}
+					>
 						<WalletMenu closeModal={closeModal} />
 					</SideMenuWrapper>
 
 					<Modal.Center
-						width="512px"
+						width="400px"
 						maxWidth="90%"
 						refName={modalRef}
-						onClose={() => dispatch(activateMenu(false))}
-						onOpen={() => {}}
+						onClose={() => dispatch(activateMenu(!isMobile()))}
+						onOpen={() => dispatch(activateMenu(true))}
 					>
-						<div>
+						<div className="w-full min-h-[500px] bg-sideMenu-lightBg rounded-[10px]">
 							<WalletMenu closeModal={closeModal} />
 						</div>
 					</Modal.Center>
+
+					<Modal.Bottom
+						refName={MenuRef}
+						width="65%"
+						height="auto"
+						onClose={() => {}}
+						onOpen={() => {}}
+					>
+						<GlassMenuWrapper></GlassMenuWrapper>
+					</Modal.Bottom>
 				</LayoutContainer>
 			</LayoutWrapper>
 		</ThemeProvider>

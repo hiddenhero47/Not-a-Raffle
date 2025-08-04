@@ -49,6 +49,8 @@ export const colors = {
 			lightPanel: '#202346',
 			panelBorder: '#202a46',
 			lightPanelBorder: '#232d4d',
+			text: '#fefcfe',
+			sbText: '#646d97',
 			blueText: '#0061E6',
 			yellow: '#FFA416',
 		},
@@ -118,11 +120,15 @@ export const colors = {
 			lightPanel: '#202346',
 			panelBorder: '#202a46',
 			lightPanelBorder: '#232d4d',
+			text: '#fefcfe',
+			sbText: '#646d97',
 			blueText: '#0061E6',
 			yellow: '#FFA416',
 		},
 		sidebar: {
 			background: '#292e55',
+			bgGlass: 'rgb(33, 37, 69, 0.2)',
+			bgGlassSb: '#3c3c61',
 			bgActive: 'rgb(149, 156, 183, 0.1)',
 			iconColor: '#747EA1',
 			iconActive: '#FFFFFF',
@@ -132,6 +138,7 @@ export const colors = {
 		},
 		sideMenu: {
 			background: '#13173a',
+			lightBg: '#181d49',
 		},
 	},
 };
