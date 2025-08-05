@@ -20,7 +20,9 @@ import Modal from '../../components/modal/index_modal';
 import { activateMenu } from '../../store/slice/wallet';
 import WalletMenu from '../side-menu/side-menu';
 import { TbGridDots } from 'react-icons/tb';
-import { HiOutlineMenuAlt3 } from 'react-icons/hi';
+import { BiSolidWalletAlt } from 'react-icons/bi';
+import { ReactComponent as Icon } from '../../assets/images/svg-raffle-icon5.svg';
+import { VectorIcon } from '../../components/icon-components/index.style';
 
 function IndexLayout() {
 	const dispatch = useDispatch();
@@ -105,10 +107,21 @@ function IndexLayout() {
 
 					<PageFrame>
 						<NavBar>
-							<div className="basis-0 flex-grow min-w-0"></div>
-							<button onClick={walletMenuSwitch}>
-								<HiOutlineMenuAlt3 />
-							</button>
+							<div className="basis-0 flex-grow min-w-0 flex" id="navContainer">
+								<div className="flex items-end gap-[5px]">
+									<VectorIcon width="38px" height="38px" vector={Icon} />
+									<span className="text-[22px] font-[900] text-mainBody-text">
+										Not A{' '}
+										<i className="text-mainBody-yellow not-italic text-[20px]">
+											Raffle
+										</i>
+									</span>
+								</div>
+
+								<button id="walletButton" onClick={walletMenuSwitch}>
+									<BiSolidWalletAlt />
+								</button>
+							</div>
 						</NavBar>
 
 						<Outlet />
@@ -141,7 +154,7 @@ function IndexLayout() {
 
 					<Modal.Bottom
 						refName={MenuRef}
-						width="65%"
+						width="80%"
 						height="auto"
 						onClose={() => {}}
 						onOpen={() => {}}

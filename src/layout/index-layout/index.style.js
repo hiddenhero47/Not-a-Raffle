@@ -202,4 +202,24 @@ export const NavBar = styled.nav`
 	min-height: 10px;
 	display: flex;
 	position: relative;
+	padding-inline: clamp(0px, 4.5%, 48px);
+	padding-top: 15px;
+	font-family: Outfit;
+	align-items: center;
+
+	#walletButton {
+		margin-left: auto;
+		padding: 3px;
+		height: fit-content;
+		border-radius: 5px;
+		font-size: 20px;
+		background-color: ${({theme}) => theme?.mainBody?.boxBgLight};
+		color: ${({theme}) => theme?.mainBody?.icon};
+		border: 1px solid ${({theme}) => theme?.mainBody?.boxBorder};
+	}
+
+	#navContainer {
+		border-bottom: 1px solid ${({theme}) => theme?.mainBody?.boxBorder};
+		padding-bottom: 13px;
+	} 
 `;
