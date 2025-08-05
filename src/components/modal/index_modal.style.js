@@ -24,7 +24,7 @@ export const LeftDialog = styled.dialog`
 	}
 `;
 
-export const LeftSell = styled.div`
+export const LeftShell = styled.div`
 	background-color: transparent;
 	padding-block: ${(props) => props.$borderPaddingY || '40px'};
 	width: ${(props) => props.width};
@@ -114,37 +114,23 @@ export const BottomDialog = styled.dialog`
 	}
 `;
 
-export const BottomSell = styled.div`
+export const BottomShell = styled.div`
 	background-color: transparent;
 	padding-block: ${(props) => props.$borderPaddingY || '40px'};
-	width: 100%;
+	width: ${(props) => props.width};
 	height: ${(props) => props.height};
 	overflow-x: hidden;
 	visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
 	border: 0px solid transparent;
-	/* margin-top: calc(100vh - ${(props) => props.height}); */
+	margin: auto;
+	margin-top: 70vh;
 	margin-bottom: 0;
-	transform: ${(props) =>
+	/* transform: ${(props) =>
 		props.$animation
 			? props.$isOpen
 				? 'translate3d(0, 0, 0)'
 				: 'translate3d(0, 600px, 0)'
 			: 'unset'};
 	transition: transform 0.6s;
-	transition-timing-function: ease;
-
-	@media (min-width: 451px) and (max-width: 744px) {
-		/* margin-top: calc(100vh - ${(props) => props.height} - 90px); */
-		margin-bottom: 90px;
-	}
-
-	@media (min-width: 361px) and (max-width: 450px) {
-		/* margin-top: calc(100vh - ${(props) => props.height} - 90px); */
-		margin-bottom: 90px;
-	}
-
-	@media (max-width: 360px) {
-		/* margin-top: calc(100vh - ${(props) => props.height} - 70px); */
-		margin-bottom: 70px;
-	}
+	transition-timing-function: ease; */
 `;

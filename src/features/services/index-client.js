@@ -1,5 +1,5 @@
 import axios from "axios";
-import { store } from "../store/index";
+import { store } from "../../store/index";
 import { toast } from "react-toastify";
 
 // Get user details

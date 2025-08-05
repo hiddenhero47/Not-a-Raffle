@@ -6,9 +6,9 @@ import React, {
 	forwardRef,
 } from 'react';
 // import PropTypes from 'prop-types';
-import { BottomDialog, BottomSell } from '../index_modal.style';
+import { BottomDialog, BottomShell } from '../index_modal.style';
 
-function ModalBottom({ children, onClose, onOpen, height, animation }, ref) {
+function ModalBottom({ children, onClose, onOpen, width, height, animation }, ref) {
 	const [isOpen, setIsOpen] = useState(false);
 	const modalRef = useRef(null);
 	const ModelSellRef = useRef(null);
@@ -49,15 +49,17 @@ function ModalBottom({ children, onClose, onOpen, height, animation }, ref) {
 			ref={modalRef}
 			onClose={closeModal}
 		>
-			<BottomSell
+			<BottomShell
+				className="intro-y"
 				open={isOpen}
 				ref={ModelSellRef}
 				$isOpen={isOpen}
+				width={width}
 				height={height}
 				$animation={animation}
 			>
 				{children}
-			</BottomSell>
+			</BottomShell>
 		</BottomDialog>
 	);
 }

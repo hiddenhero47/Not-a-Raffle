@@ -9,7 +9,6 @@ import AboutUs from './pages/about-us';
 import Settings from './pages/settings';
 import NotFound from './pages/not-found';
 
-
 const queryClient = new QueryClient();
 
 function App() {

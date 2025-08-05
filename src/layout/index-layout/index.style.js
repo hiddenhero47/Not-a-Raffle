@@ -7,7 +7,8 @@ export const LayoutWrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	/* background-image: radial-gradient(circle at top center, #1c244c, #0c0f27); */
-	background-image: radial-gradient(
+	background-image:
+		radial-gradient(
 			circle at 63% 12%,
 			${({ theme }) => theme?.mainBody?.bgPattern} 0%,
 			${({ theme }) => theme?.mainBody?.bgPattern} 5%,
@@ -109,24 +110,60 @@ export const SidebarWrapper = styled.div`
 		width: 0px;
 		min-width: unset;
 		max-width: unset;
+		display: none;
 	}
 `;
 
-export const PageCard = styled.div`
+export const GlassMenuWrapper = styled.div`
+	width: 100%;
+	height: 70px;
+	border-radius: 20px;
+	padding: 1px;
+	background-color: ${({theme}) => theme?.sidebar?.bgGlass};
+	border: 1px solid transparent;
+	background-image: radial-gradient(
+		circle at 50% 258%,
+		${({theme}) => theme?.sidebar?.bgGlassSb},
+		${({theme}) => theme?.sidebar?.bgGlass}
+	);
+`;
+
+export const MenuButton = styled.button`
+	display: none;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: calc(100% + 10px);
+
+	@media (max-width: 635px) {
+		padding: 5px;
+		display: flex;
+		background: ${({ theme }) => theme?.sidebar?.background};
+		color: ${({ theme }) => theme?.mainBody?.sbText};
+		border-radius: 9999px;
+		font-size: 20px;
+	}
+`;
+
+export const PageFrame = styled.div`
 	flex-grow: 1;
 	flex-basis: 0;
 	min-width: 500px;
 	height: 100%;
 	border-radius: 20px;
-	background-color: ${({ theme }) => theme.mainBody?.cardBg};
+	background-color: ${({ theme }) => theme.mainBody?.frameBg};
 	border-width: 0px 2px 2px 0px;
 	border-style: solid;
-	border-color: ${({ theme }) => theme.mainBody?.cardBorder};
+	border-color: ${({ theme }) => theme.mainBody?.frameBorder};
 	background-image: linear-gradient(
 		195deg,
-		${({ theme }) => theme.mainBody?.cardLight} 0%,
-		${({ theme }) => theme.mainBody?.cardDark} 90%
+		${({ theme }) => theme.mainBody?.frameLight} 0%,
+		${({ theme }) => theme.mainBody?.frameDark} 90%
 	);
+	color: ${({ theme }) => theme?.mainBody?.text};
+	z-index: 5;
+	transition: all 0.4s;
+	transition-timing-function: ease-in-out;
 
 	@media (max-width: 635px) {
 		width: 100%;
@@ -144,10 +181,45 @@ export const SideMenuWrapper = styled.div`
 	display: ${(props) => (props.$isActive ? 'flex' : 'none')};
 	border-radius: 0px 20px 20px 0px;
 	background-color: ${({ theme }) => theme.sideMenu?.background};
+	transition: all 0.2s;
+	transition-timing-function: ease-in-out;
+
+	div {
+		visibility: ${(props) => (props.$isActive ? 'visible' : 'hidden')};
+	}
 
 	@media (max-width: 1150px) {
+		display: none;
 		width: 0px;
 		min-width: unset;
 		max-width: unset;
 	}
+`;
+
+export const NavBar = styled.nav`
+	width: 100%;
+	height: fit-content;
+	min-height: 10px;
+	display: flex;
+	position: relative;
+	padding-inline: clamp(0px, 4.5%, 48px);
+	padding-top: 15px;
+	font-family: Outfit;
+	align-items: center;
+
+	#walletButton {
+		margin-left: auto;
+		padding: 3px;
+		height: fit-content;
+		border-radius: 5px;
+		font-size: 20px;
+		background-color: ${({theme}) => theme?.mainBody?.boxBgLight};
+		color: ${({theme}) => theme?.mainBody?.icon};
+		border: 1px solid ${({theme}) => theme?.mainBody?.boxBorder};
+	}
+
+	#navContainer {
+		border-bottom: 1px solid ${({theme}) => theme?.mainBody?.boxBorder};
+		padding-bottom: 13px;
+	} 
 `;

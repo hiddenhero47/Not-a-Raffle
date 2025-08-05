@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.5.2",
+    "@walletconnect/ethereum-provider": "^2.20.2",
     "axios": "^1.7.8",
     "chart.js": "^4.4.7",
     "dayjs": "^1.11.13",
+    "ethers": "^6.13.7",
     "formik": "^2.4.6",
     "html2canvas": "^1.4.1",
     "libphonenumber-js": "^1.11.15",
@@ -38,10 +41,10 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "PORT=3001 craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
