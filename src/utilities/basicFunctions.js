@@ -124,8 +124,8 @@ export function addCommas(number) {
   return formattedInteger;
 }
 
-export function truncateHex({ hexString, len }) {
-  if (hexString?.length > len && len > 5) {
+export function truncateHex({ hexString, len = 0 }) {
+  if (hexString && hexString?.length > len && len > 5) {
     const prefixLength = Math.ceil((len - 5) / 2);
     const suffixLength = len - prefixLength - 3; // 3 for the ellipsis
 
@@ -134,7 +134,7 @@ export function truncateHex({ hexString, len }) {
 
     return prefix + "..." + suffix;
   }
-  return hexString;
+  return hexString ?? "";
 }
 
 export function truncate({ str, len }) {

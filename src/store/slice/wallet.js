@@ -6,6 +6,11 @@ import { initWcProviderEvents } from '../../features/web3-services/web3-utilitie
 
 // const {ethers} = require("ethers")
 
+export const walletTypes = {
+	Type1: "injected",
+	Type2: "walletconnect",
+};
+
 const chains = [1, 137, 56]; // Add more supported chains if needed
 
 const wcProviderModule = async () => {
@@ -193,7 +198,7 @@ const walletSlice = createSlice({
 				state.pending = false;
 				state.isConnected = true;
 				state.connectionError = false;
-				state.walletType = 'injected';
+				state.walletType = walletTypes.Type1;
 				state.walletData = action.payload;
 				state.address = action?.payload?.address;
 				state.chainId = action?.payload?.chainId;
@@ -213,7 +218,7 @@ const walletSlice = createSlice({
 				state.pending = false;
 				state.isConnected = true;
 				state.connectionError = false;
-				state.walletType = 'walletconnect';
+				state.walletType = walletTypes.Type2;
 				state.walletData = action.payload;
 				state.address = action.payload.address;
 				state.chainId = action.payload.chainId;
@@ -233,7 +238,7 @@ const walletSlice = createSlice({
 				state.pending = false;
 				state.isConnected = true;
 				state.connectionError = false;
-				state.walletType = 'walletconnect';
+				state.walletType = walletTypes.Type2;
 				state.walletData = action.payload;
 				state.address = action.payload.address;
 				state.chainId = action.payload.chainId;

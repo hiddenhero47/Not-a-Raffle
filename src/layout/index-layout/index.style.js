@@ -175,7 +175,7 @@ export const PageFrame = styled.div`
 
 export const SideMenuWrapper = styled.div`
 	height: 90%;
-	width: ${(props) => (props.$isActive ? '20%' : '0px')};
+	width: ${(props) => (props.$isActive ? '22%' : '0px')};
 	min-width: ${(props) => (props.$isActive ? '216px' : 'unset')};
 	max-width: ${(props) => (props.$isActive ? '240px' : 'unset')};
 	display: ${(props) => (props.$isActive ? 'flex' : 'none')};
