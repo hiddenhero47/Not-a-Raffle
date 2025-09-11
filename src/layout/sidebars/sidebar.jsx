@@ -6,29 +6,29 @@ import {
 	RoutersBoxFoot,
 	OptionsFoot,
 } from './index.style';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 // import { AiFillHome } from "react-icons/ai";
 import { IoIosSettings } from 'react-icons/io';
 import { TbListDetails } from 'react-icons/tb';
 import { MdDashboard } from 'react-icons/md';
-import { BiLogOut } from 'react-icons/bi';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../store/slice/auth';
-import { setTheme } from '../../store/slice/app-theme';
-import { getFromLocalStorage } from '../../utilities/basicFunctions';
+// import { BiLogOut } from 'react-icons/bi';
+// import { useDispatch } from 'react-redux';
+// import { logout } from '../../store/slice/auth';
+// import { setTheme } from '../../store/slice/app-theme';
+// import { getFromLocalStorage } from '../../utilities/basicFunctions';
 
 function Sidebar({ close }) {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+	// const dispatch = useDispatch();
+	// const navigate = useNavigate();
 	const location = useLocation();
 
-	const Logout = async () => {
-		const myThemes = getFromLocalStorage('appThemes') || 'dark';
-		await navigate('/auth');
-		dispatch(logout());
-		localStorage.clear();
-		dispatch(setTheme(myThemes));
-	};
+	// const Logout = async () => {
+	// 	const myThemes = getFromLocalStorage('appThemes') || 'dark';
+	// 	await navigate('/auth');
+	// 	dispatch(logout());
+	// 	localStorage.clear();
+	// 	dispatch(setTheme(myThemes));
+	// };
 
 	const handelClose = () => {
 		if (close) {
@@ -73,7 +73,7 @@ function Sidebar({ close }) {
 								</Link>
 							</OptionsFoot>
 
-							<OptionsFoot>
+							{/* <OptionsFoot>
 								<button
 									onClick={() => Logout()}
 									className="hover:text-sidebar-textHover text-sidebar-text"
@@ -83,7 +83,7 @@ function Sidebar({ close }) {
 									</i>
 									<span>Log out</span>
 								</button>
-							</OptionsFoot>
+							</OptionsFoot> */}
 						</RoutersBoxFoot>
 					</div>
 				</div>

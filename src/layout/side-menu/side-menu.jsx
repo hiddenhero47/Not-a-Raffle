@@ -26,8 +26,15 @@ import { MdCancel } from 'react-icons/md';
 
 function WalletMenu({ closeModal, isMobile }) {
 	const dispatch = useDispatch();
-	const { address, isConnected, pending, message, menuIsActive, walletType } =
-		useSelector((state) => state.wallet);
+	const {
+		address,
+		isConnected,
+		pending,
+		message,
+		menuIsActive,
+		walletType,
+		connectionError,
+	} = useSelector((state) => state.wallet);
 
 	const [dropdown, setDropdown] = useState(false);
 	const [connectMethod, setConnectMethod] = useState(
@@ -90,7 +97,7 @@ function WalletMenu({ closeModal, isMobile }) {
 				>
 					<div className="flex justify-between w-full items-center">
 						<div className="flex gap-[5px] items-center">
-							<div id="circleBox" />{' '}
+							<div id="circleBox" className={isMobile && 'ml-[5px]'} />{' '}
 							<span id="textAddress">
 								{truncateHex({ hexString: address, len: 15 })}
 								{address ? '' : 'xxxxxxx'}
@@ -98,9 +105,17 @@ function WalletMenu({ closeModal, isMobile }) {
 						</div>
 
 						{!isConnected ? (
-							<MyConnectButton onClick={handleConnect}>connect</MyConnectButton>
+							<MyConnectButton
+								onClick={handleConnect}
+								className={isMobile && 'mr-[3px]'}
+							>
+								connect
+							</MyConnectButton>
 						) : (
-							<MyConnectButton onClick={handleDisconnect}>
+							<MyConnectButton
+								onClick={handleDisconnect}
+								className={isMobile && 'mr-[3px]'}
+							>
 								cancel
 							</MyConnectButton>
 						)}
@@ -161,10 +176,12 @@ function WalletMenu({ closeModal, isMobile }) {
 					</DropdownWrapper>
 				</ConnectionPanel>
 
-				{message && (
+				{message && connectionError ? (
 					<p className="text-[#D93E39] text-[13px] ml-[2px]">
 						Error: {message}
 					</p>
+				) : (
+					''
 				)}
 			</WalletMenuContainer>
 
