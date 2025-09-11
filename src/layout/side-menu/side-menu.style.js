@@ -162,7 +162,7 @@ export const DropdownWrapper = styled.div`
 
 	.option {
 		background: #222447;
-		height: 25px;
+		height: ${(props) => (props.$isMobile ? '30px' : '25px')};
 		width: 100%;
 		border-radius: 4px;
 		display: flex;

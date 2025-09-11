@@ -61,6 +61,10 @@ export const CenterDialog = styled.dialog`
 	background-color: rgba(0, 0, 0, 0.4);
 	overflow-y: auto;
 
+	&[open] {
+		display: flex;
+	}
+
 	&::-webkit-scrollbar {
 		width: 0px;
 		height: 3px;
@@ -83,7 +87,7 @@ export const CenterShell = styled.div`
 	visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
 	border: 0px solid transparent;
 	margin: auto;
-	margin-top: 15vh;
+	/* margin-top: 15vh; */
 
 	@media (max-width: ${(props) => props.$mediaQuery || '500px'}) {
 		width: ${(props) => (props.$queryWidth ? props.$queryWidth : props.width)};
@@ -100,6 +104,10 @@ export const BottomDialog = styled.dialog`
 	left: 0;
 	background-color: rgba(0, 0, 0, 0.4);
 	overflow-y: auto;
+
+	&[open] {
+		display: flex;
+	}
 
 	&::-webkit-scrollbar {
 		width: 0px;
@@ -123,8 +131,9 @@ export const BottomShell = styled.div`
 	visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
 	border: 0px solid transparent;
 	margin: auto;
-	margin-top: 70vh;
-	margin-bottom: 0;
+	/* margin-top: 70vh; */
+	margin-bottom: 6vh;
+
 	/* transform: ${(props) =>
 		props.$animation
 			? props.$isOpen

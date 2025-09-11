@@ -141,14 +141,14 @@ function IndexLayout() {
 					</SideMenuWrapper>
 
 					<Modal.Center
-						width="400px"
+						width="340px"
 						maxWidth="90%"
 						refName={modalRef}
 						onClose={() => dispatch(activateMenu(!isMobile()))}
 						onOpen={() => dispatch(activateMenu(true))}
 					>
-						<div className="w-full min-h-[500px] bg-sideMenu-lightBg rounded-[10px]">
-							<WalletMenu closeModal={closeModal} />
+						<div className="w-full min-h-[600px] bg-sideMenu-background rounded-[20px] px-[10px]">
+							<WalletMenu closeModal={closeModal} isMobile={true} />
 						</div>
 					</Modal.Center>
 

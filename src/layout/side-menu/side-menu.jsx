@@ -17,14 +17,14 @@ import {
 	walletTypes,
 } from '../../store/slice/wallet';
 import { SiOpenbadges } from 'react-icons/si';
-import { HiOutlineX } from 'react-icons/hi';
 import { truncateHex } from '../../utilities/basicFunctions';
 import { LuArrowDownNarrowWide } from 'react-icons/lu';
 
 import { GiFox } from 'react-icons/gi';
 import { SiWalletconnect } from 'react-icons/si';
+import { MdCancel } from 'react-icons/md';
 
-function WalletMenu({ closeModal }) {
+function WalletMenu({ closeModal, isMobile }) {
 	const dispatch = useDispatch();
 	const { address, isConnected, pending, message, menuIsActive, walletType } =
 		useSelector((state) => state.wallet);
@@ -72,9 +72,15 @@ function WalletMenu({ closeModal }) {
 							</span>
 						</h3>
 					</div>
-					<button>
-						<HiOutlineX />
-					</button>
+
+					{isMobile && (
+						<button
+							className="text-[17px] text-[#868bac]"
+							onClick={() => closeModal()}
+						>
+							<MdCancel />
+						</button>
+					)}
 				</Header>
 
 				<ConnectionPanel
@@ -122,6 +128,7 @@ function WalletMenu({ closeModal }) {
 
 					<DropdownWrapper
 						$dropdown={dropdown}
+						$isMobile={isMobile}
 						className={dropdown ? 'open' : ''}
 					>
 						<div
