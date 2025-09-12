@@ -119,12 +119,12 @@ export const GlassMenuWrapper = styled.div`
 	height: 70px;
 	border-radius: 20px;
 	padding: 1px;
-	background-color: ${({theme}) => theme?.sidebar?.bgGlass};
+	background-color: ${({ theme }) => theme?.sidebar?.bgGlass};
 	border: 1px solid transparent;
 	background-image: radial-gradient(
 		circle at 50% 258%,
-		${({theme}) => theme?.sidebar?.bgGlassSb},
-		${({theme}) => theme?.sidebar?.bgGlass}
+		${({ theme }) => theme?.sidebar?.bgGlassSb},
+		${({ theme }) => theme?.sidebar?.bgGlass}
 	);
 `;
 
@@ -164,12 +164,23 @@ export const PageFrame = styled.div`
 	z-index: 5;
 	transition: all 0.4s;
 	transition-timing-function: ease-in-out;
+	display: flex;
+	flex-direction: column;
 
 	@media (max-width: 635px) {
 		width: 100%;
 		min-width: unset;
 		flex-grow: unset;
 		flex-basis: unset;
+	}
+
+	#mainPageWrapper {
+		flex-grow: 1;
+		flex-basis: 0;
+		padding-inline: clamp(0px, 4.5%, 48px);
+		padding-bottom: 10px;
+		overflow: hidden;
+		overflow-y: auto;
 	}
 `;
 
@@ -213,13 +224,13 @@ export const NavBar = styled.nav`
 		height: fit-content;
 		border-radius: 5px;
 		font-size: 20px;
-		background-color: ${({theme}) => theme?.mainBody?.boxBgLight};
-		color: ${({theme}) => theme?.mainBody?.icon};
-		border: 1px solid ${({theme}) => theme?.mainBody?.boxBorder};
+		background-color: ${({ theme }) => theme?.mainBody?.boxBgLight};
+		color: ${({ theme }) => theme?.mainBody?.icon};
+		border: 1px solid ${({ theme }) => theme?.mainBody?.boxBorder};
 	}
 
 	#navContainer {
-		border-bottom: 1px solid ${({theme}) => theme?.mainBody?.boxBorder};
+		border-bottom: 1px solid ${({ theme }) => theme?.mainBody?.boxBorder};
 		padding-bottom: 13px;
-	} 
+	}
 `;

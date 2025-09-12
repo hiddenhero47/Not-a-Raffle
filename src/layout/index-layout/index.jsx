@@ -124,7 +124,7 @@ function IndexLayout() {
 							</div>
 						</NavBar>
 
-						<Outlet />
+						<div id='mainPageWrapper'><Outlet /></div>
 
 						<MenuButton onClick={openSidebar}>
 							<TbGridDots />
