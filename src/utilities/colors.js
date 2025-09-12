@@ -144,7 +144,7 @@ export const colors = {
 			background: '#13173a',
 			lightBg: '#181d49',
 			iconColor: '#646d97',
-			iconSbColor: '#6b719a',
+			iconSbColor: '#868bac',
 			text: '#b3b6cb',
 			textSb: '#6b719a',
 			statusBlue: '#0088E8',
@@ -161,7 +161,7 @@ export const colors = {
 			boxSbText: '#868bac',
 			boxBorder: '#282d57',
 			circleBox: '#eeebfa',
-			circleBoxSb: '6b719a',
+			circleBoxSb: '#6b719a',
 		},
 	},
 };

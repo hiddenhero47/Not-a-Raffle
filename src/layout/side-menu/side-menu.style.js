@@ -49,12 +49,12 @@ export const Header = styled.div`
 
 		i {
 			font-size: 26px;
-			color: #646d97;
+			color: ${({ theme }) => theme?.sideMenu?.iconColor};
 		}
 
 		h3 {
 			font-size: 14px;
-			color: #6b719a;
+			color: ${({ theme }) => theme?.sideMenu?.textSb};
 			font-family: Inter;
 		}
 
@@ -80,7 +80,7 @@ export const ConnectionPanel = styled.div`
 	transition-timing-function: ease-in-out;
 
 	.line {
-		background: #282d57;
+		background: ${({ theme }) => theme?.sideMenu?.line};
 		border-radius: 9999px;
 	}
 
@@ -88,13 +88,19 @@ export const ConnectionPanel = styled.div`
 		width: 9px;
 		height: 9px;
 		border-radius: 9999px;
-		border: 2px solid ${(props) => (props.$connect ? '#eeebfa' : '#6b719a')};
-		box-shadow: ${(props) => (props.$connect ? '0px 0px 20px #eeebfa' : '')};
+		border: 2px solid
+			${(props) =>
+				props.$connect
+					? props.theme?.sideMenu.circleBox
+					: props.theme?.sideMenu.circleBoxSb};
+		box-shadow: ${(props) =>
+			props.$connect && `0px 0px 20px ${props.theme?.sideMenu.circleBox}`};
+		margin-left: 5px;
 	}
 
 	#textAddress {
 		font-size: 11.5px;
-		color: #b3b6cb;
+		color: ${({ theme }) => theme?.sideMenu?.text};
 		font-family: Outfit;
 		font-weight: 700;
 	}
@@ -105,7 +111,7 @@ export const ConnectionPanel = styled.div`
 		display: flex;
 		border-radius: 5px;
 		font-size: 19px;
-		color: #6b719a;
+		color: ${({ theme }) => theme?.sideMenu?.textSb};
 		transition: transform 0.4s;
 		transition-timing-function: ease-in-out;
 	}
@@ -113,7 +119,11 @@ export const ConnectionPanel = styled.div`
 
 export const DotBox = styled.div`
 	border: 2px solid #a2ddaf;
-	border: 2px solid ${(props) => (props.$isOn ? '#a2ddaf' : '#ffce80')};
+	border: 2px solid
+		${(props) =>
+			props.$isOn
+				? props.theme?.sideMenu.statusGreen
+				: props.theme?.sideMenu.statusYellow};
 	margin-top: 3px;
 	border-radius: 9999px;
 	margin-left: 5px;
@@ -124,11 +134,12 @@ export const DotBox = styled.div`
 export const MyConnectButton = styled.button`
 	padding: 6px;
 	border-radius: 5px;
-	background-color: #2f3051;
-	color: #b3b6cb;
-	border: 1px solid #383961;
+	background-color: ${({ theme }) => theme?.sideMenu?.btnBg};
+	color: ${({ theme }) => theme?.sideMenu?.text};
+	border: 1px solid ${({ theme }) => theme?.sideMenu?.btnBorder};
 	font-size: 12.5px;
 	font-family: Inter;
+	margin-right: 3px;
 `;
 
 export const DropdownWrapper = styled.div`
@@ -161,7 +172,7 @@ export const DropdownWrapper = styled.div`
 	}
 
 	.option {
-		background: #222447;
+		background: ${({ theme }) => theme?.sideMenu?.boxSb};
 		height: ${(props) => (props.$isMobile ? '30px' : '25px')};
 		width: 100%;
 		border-radius: 4px;
@@ -169,14 +180,14 @@ export const DropdownWrapper = styled.div`
 		align-items: center;
 		font-size: 12px;
 		font-family: Inter;
-		color: #868bac;
+		color: ${({ theme }) => theme?.sideMenu?.boxSbText};
 		font-weight: 700;
 		cursor: pointer;
-		border: 1px solid #282d57;
+		border: 1px solid ${({ theme }) => theme?.sideMenu?.boxBorder};
 	}
 
 	.option.selected {
-		color: #c7c2d6;
-		background: #2f3051;
+		color: ${({ theme }) => theme?.sideMenu?.boxText};
+		background: ${({ theme }) => theme?.sideMenu?.box};
 	}
 `;

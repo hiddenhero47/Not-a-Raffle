@@ -82,7 +82,7 @@ function WalletMenu({ closeModal, isMobile }) {
 
 					{isMobile && (
 						<button
-							className="text-[17px] text-[#868bac]"
+							className="text-[17px] text-sideMenu-iconSbColor"
 							onClick={() => closeModal()}
 						>
 							<MdCancel />
@@ -97,7 +97,7 @@ function WalletMenu({ closeModal, isMobile }) {
 				>
 					<div className="flex justify-between w-full items-center">
 						<div className="flex gap-[5px] items-center">
-							<div id="circleBox" className={isMobile && 'ml-[5px]'} />{' '}
+							<div id="circleBox" />{' '}
 							<span id="textAddress">
 								{truncateHex({ hexString: address, len: 15 })}
 								{address ? '' : 'xxxxxxx'}
@@ -105,17 +105,9 @@ function WalletMenu({ closeModal, isMobile }) {
 						</div>
 
 						{!isConnected ? (
-							<MyConnectButton
-								onClick={handleConnect}
-								className={isMobile && 'mr-[3px]'}
-							>
-								connect
-							</MyConnectButton>
+							<MyConnectButton onClick={handleConnect}>connect</MyConnectButton>
 						) : (
-							<MyConnectButton
-								onClick={handleDisconnect}
-								className={isMobile && 'mr-[3px]'}
-							>
+							<MyConnectButton onClick={handleDisconnect}>
 								cancel
 							</MyConnectButton>
 						)}
@@ -124,7 +116,7 @@ function WalletMenu({ closeModal, isMobile }) {
 					<div className="w-[92%] h-[1px] line mx-[auto] my-[10px]" />
 
 					<div className="w-[90%] flex items-center mx-[auto]">
-						<span className="text-[#b3b6cb] text-[13px] font-[700]">
+						<span className="text-sideMenu-text text-[13px] font-[700]">
 							{connectMethod === walletTypes.Type1 && 'Local Wallet'}
 							{connectMethod === walletTypes.Type2 && 'External Wallet'}
 						</span>
@@ -177,7 +169,7 @@ function WalletMenu({ closeModal, isMobile }) {
 				</ConnectionPanel>
 
 				{message && connectionError ? (
-					<p className="text-[#D93E39] text-[13px] ml-[2px]">
+					<p className="text-sideMenu-statusRed text-[13px] ml-[2px]">
 						Error: {message}
 					</p>
 				) : (
