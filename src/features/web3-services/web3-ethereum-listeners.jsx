@@ -6,24 +6,27 @@ import {
 	updateChain,
 	reconnectWallet,
 	refresh,
+	walletTypes
 } from '../../store/slice/wallet';
 
 const EthereumListeners = () => {
 	const dispatch = useDispatch();
-	const { isConnected, walletType } = useSelector((state) => state.wallet);
+	const { isConnected, walletType, address } = useSelector(
+		(state) => state.wallet
+	);
 	const triedReconnect = useRef(false);
 
 	const data = useSelector((state) => state.wallet);
 
 	console.log(data);
-	
 
 	useEffect(() => {
 		if (
 			!triedReconnect.current &&
 			walletType &&
 			isConnected &&
-			walletType !== 'injected'
+			walletType !== 'injected' &&
+			address
 		) {
 			dispatch(reconnectWallet());
 		}
@@ -36,13 +39,15 @@ const EthereumListeners = () => {
 
 		const handleDisconnect = () => {
 			console.log('[Ethereum] Wallet disconnected');
-			dispatch(disconnectWallet({ isInjected: true }));
+			const isInjected = Boolean(walletType === walletTypes.Type1);
+			dispatch(disconnectWallet({ isInjected }));
 		};
 
 		const handleAccountsChanged = (accounts) => {
 			if (accounts.length === 0) {
 				console.log('[Ethereum] No accounts — disconnected');
-				dispatch(disconnectWallet({ isInjected: true }));
+				const isInjected = Boolean(walletType === walletTypes.Type1);
+				dispatch(disconnectWallet({ isInjected }));
 			} else {
 				console.log('[Ethereum] Account changed:', accounts[0]);
 				dispatch(updateAccount(accounts[0]));
@@ -66,7 +71,7 @@ const EthereumListeners = () => {
 			window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
 			window.ethereum.removeListener('chainChanged', handleChainChanged);
 		};
-	}, [dispatch, isConnected]);
+	}, [dispatch, isConnected, walletType]);
 
 	return null; // No UI
 };

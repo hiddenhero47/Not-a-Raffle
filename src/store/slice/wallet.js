@@ -1,28 +1,39 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import { ethers } from 'ethers';
 import { BrowserProvider } from 'ethers';
 import EthereumProvider from '@walletconnect/ethereum-provider';
-import { initWcProviderEvents } from '../../features/web3-services/web3-utilities';
-
-// const {ethers} = require("ethers")
+import {
+	initWcProviderEvents,
+	clearWcSessions,
+} from '../../features/web3-services/web3-utilities';
+// import icon from '../../assets/images/raffle-icon5.png';
 
 export const walletTypes = {
-	Type1: "injected",
-	Type2: "walletconnect",
+	Type1: 'injected',
+	Type2: 'walletconnect',
 };
 
-const chains = [1, 137, 56]; // Add more supported chains if needed
+const optionalChains = [1, 137, 56]; // Add more supported chains if needed
+const WCprojectID = process.env.REACT_APP_WC_PROJECT_ID;
+const dAppUrl = "https://7c2682bf35b6.ngrok-free.app"
 
 const wcProviderModule = async () => {
 	const provider = await EthereumProvider.init({
-		projectId: 'YOUR_PROJECT_ID',
-		chains,
+		projectId: WCprojectID,
+		metadata: {
+			name: 'Not a Raffle',
+			description: 'My Website Description',
+			url: dAppUrl,
+			icons: [`${dAppUrl}/logo512.png`],
+		},
+		optionalChains,
 		showQrModal: true,
 		rpcMap: {
-			1: 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+			// 1: 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+			1: 'https://eth.llamarpc.com',
 			137: 'https://polygon-rpc.com',
 			56: 'https://bsc-dataseed.binance.org/',
 		},
+		relayUrl: 'wss://relay.walletconnect.com',
 	});
 	return provider;
 };
@@ -57,12 +68,13 @@ export const connectWalletGlobal = createAsyncThunk(
 
 			return {
 				address,
-				provider,
-				signer,
-				chainId: network.chainId,
+				provider: JSON.stringify(provider),
+				signer: JSON.stringify(signer),
+				chainId: network?.chainId?.toString(),
 			};
 		} catch (error) {
 			const message = error?.message || String(error);
+			await thunkAPI.dispatch(disconnectWallet());
 			return thunkAPI.rejectWithValue(message);
 		}
 	}
@@ -90,9 +102,9 @@ export const reconnectWallet = createAsyncThunk(
 				const network = await provider.getNetwork();
 				return {
 					address,
-					provider,
-					signer,
-					chainId: network.chainId,
+					provider: JSON.stringify(provider),
+					signer: JSON.stringify(signer),
+					chainId: network?.chainId?.toString(),
 				};
 			}
 
@@ -119,9 +131,9 @@ export const connectWallet = createAsyncThunk(
 
 			return {
 				address,
-				provider,
-				signer,
-				chainId: network.chainId,
+				provider: JSON.stringify(provider),
+				signer: JSON.stringify(signer),
+				chainId: network?.chainId?.toString(),
 			};
 		} catch (error) {
 			const message = error?.message || error.toString();
@@ -148,7 +160,7 @@ export const disconnectWallet = createAsyncThunk(
 				await wcProvider.disconnect();
 				wcProvider = null;
 			}
-
+			clearWcSessions();
 			return true;
 		} catch (error) {
 			const message = error?.message || String(error);
@@ -185,7 +197,7 @@ const walletSlice = createSlice({
 		refresh: (state) => {
 			state.pending = false;
 			state.connectionError = false;
-			state.message = "";
+			state.message = '';
 		},
 	},
 	extraReducers: (builder) => {
@@ -266,6 +278,11 @@ const walletSlice = createSlice({
 	},
 });
 
-export const { resetWalletState, activateMenu, updateAccount, updateChain, refresh } =
-	walletSlice.actions;
+export const {
+	resetWalletState,
+	activateMenu,
+	updateAccount,
+	updateChain,
+	refresh,
+} = walletSlice.actions;
 export default walletSlice.reducer;

@@ -181,7 +181,7 @@ export const DropdownWrapper = styled.div`
 		font-size: 12px;
 		font-family: Inter;
 		color: ${({ theme }) => theme?.sideMenu?.boxSbText};
-		font-weight: 700;
+		font-weight: 600;
 		cursor: pointer;
 		border: 1px solid ${({ theme }) => theme?.sideMenu?.boxBorder};
 	}

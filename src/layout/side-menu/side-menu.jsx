@@ -126,7 +126,7 @@ function WalletMenu({ closeModal, isMobile }) {
 
 						<button
 							id="buttonWalletTypes"
-							className={dropdown && 'rotate-[-180deg]'}
+							className={dropdown ? 'rotate-[-180deg]' : ''}
 							onClick={() => setDropdown(!dropdown)}
 						>
 							<LuArrowDownNarrowWide />

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { colors } from '../../utilities/colors';
@@ -73,17 +73,28 @@ function IndexLayout() {
 		}
 	};
 
-	const walletMenuActive = useMemo(() => {
+	// const walletMenuActive = useMemo(() => {
+	// 	if (isMobile() && menuIsActive) {
+	// 		openModal();
+	// 		return false;
+	// 	}
+
+	// 	if (!isMobile() && menuIsActive) {
+	// 		return true;
+	// 	}
+
+	// 	return false;
+	// }, [menuIsActive]);
+
+	let walletMenuActive = !isMobile() && menuIsActive;
+
+	// Control modal visibility in effect, not during render
+	useEffect(() => {
 		if (isMobile() && menuIsActive) {
 			openModal();
-			return false;
+		} else if (!menuIsActive && modalRef.current) {
+			closeModal();
 		}
-
-		if (!isMobile() && menuIsActive) {
-			return true;
-		}
-
-		return false;
 	}, [menuIsActive]);
 
 	const walletMenuSwitch = () =>
@@ -124,7 +135,9 @@ function IndexLayout() {
 							</div>
 						</NavBar>
 
-						<div id='mainPageWrapper'><Outlet /></div>
+						<div id="mainPageWrapper">
+							<Outlet />
+						</div>
 
 						<MenuButton onClick={openSidebar}>
 							<TbGridDots />
