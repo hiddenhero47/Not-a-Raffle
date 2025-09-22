@@ -204,6 +204,10 @@ export const SideMenuWrapper = styled.div`
 		width: 0px;
 		min-width: unset;
 		max-width: unset;
+
+		* {
+			display: none !important;
+		}
 	}
 `;
 

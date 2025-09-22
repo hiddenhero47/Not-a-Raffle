@@ -86,14 +86,10 @@ function IndexLayout() {
 	// 	return false;
 	// }, [menuIsActive]);
 
-	let walletMenuActive = !isMobile() && menuIsActive;
-
-	// Control modal visibility in effect, not during render
+	const isFirstRender = useRef(true);
 	useEffect(() => {
-		if (isMobile() && menuIsActive) {
+		if (isMobile() && menuIsActive && !isFirstRender.current) {
 			openModal();
-		} else if (!menuIsActive && modalRef.current) {
-			closeModal();
 		}
 	}, [menuIsActive]);
 
@@ -146,7 +142,7 @@ function IndexLayout() {
 
 					<SideMenuWrapper
 						className="-intro-x"
-						$isActive={Boolean(walletMenuActive)}
+						$isActive={Boolean(menuIsActive)}
 						style={{ transitionBehavior: 'allow-discrete' }}
 						onAnimationStart={closeModal}
 					>
